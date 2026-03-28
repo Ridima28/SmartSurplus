@@ -14,7 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      food_listings: {
+        Row: {
+          ai_tags: string[] | null
+          created_at: string
+          donor_name: string
+          expiry_time: string | null
+          food_category: string | null
+          food_description: string
+          id: string
+          location: string
+          quantity: string
+          status: string
+          urgency_score: number | null
+        }
+        Insert: {
+          ai_tags?: string[] | null
+          created_at?: string
+          donor_name: string
+          expiry_time?: string | null
+          food_category?: string | null
+          food_description: string
+          id?: string
+          location: string
+          quantity: string
+          status?: string
+          urgency_score?: number | null
+        }
+        Update: {
+          ai_tags?: string[] | null
+          created_at?: string
+          donor_name?: string
+          expiry_time?: string | null
+          food_category?: string | null
+          food_description?: string
+          id?: string
+          location?: string
+          quantity?: string
+          status?: string
+          urgency_score?: number | null
+        }
+        Relationships: []
+      }
+      matches: {
+        Row: {
+          ai_explanation: string | null
+          created_at: string
+          final_score: number
+          food_category: string | null
+          food_description: string
+          food_listing_id: string | null
+          id: string
+          ngo_id: string | null
+          ngo_location: string
+          ngo_name: string
+          urgency_score: number | null
+        }
+        Insert: {
+          ai_explanation?: string | null
+          created_at?: string
+          final_score?: number
+          food_category?: string | null
+          food_description: string
+          food_listing_id?: string | null
+          id?: string
+          ngo_id?: string | null
+          ngo_location: string
+          ngo_name: string
+          urgency_score?: number | null
+        }
+        Update: {
+          ai_explanation?: string | null
+          created_at?: string
+          final_score?: number
+          food_category?: string | null
+          food_description?: string
+          food_listing_id?: string | null
+          id?: string
+          ngo_id?: string | null
+          ngo_location?: string
+          ngo_name?: string
+          urgency_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matches_food_listing_id_fkey"
+            columns: ["food_listing_id"]
+            isOneToOne: false
+            referencedRelation: "food_listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_ngo_id_fkey"
+            columns: ["ngo_id"]
+            isOneToOne: false
+            referencedRelation: "ngos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ngos: {
+        Row: {
+          capacity: number
+          contact: string
+          created_at: string
+          demand_level: string
+          id: string
+          location: string
+          name: string
+        }
+        Insert: {
+          capacity?: number
+          contact?: string
+          created_at?: string
+          demand_level?: string
+          id?: string
+          location: string
+          name: string
+        }
+        Update: {
+          capacity?: number
+          contact?: string
+          created_at?: string
+          demand_level?: string
+          id?: string
+          location?: string
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
