@@ -229,12 +229,14 @@ export default function AppChat() {
   };
 
   const handleVoice = () => {
-    const SR = (window as unknown as { webkitSpeechRecognition?: new () => SpeechRecognition; SpeechRecognition?: new () => SpeechRecognition }).webkitSpeechRecognition
-           || (window as unknown as { SpeechRecognition?: new () => SpeechRecognition }).SpeechRecognition;
+    type SR = { lang: string; start: () => void; onresult: (e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void };
+    const w = window as unknown as { webkitSpeechRecognition?: new () => SR; SpeechRecognition?: new () => SR };
+    const Ctor = w.webkitSpeechRecognition || w.SpeechRecognition;
     if (!SR) return toast({ title: "Voice not supported", description: "Your browser doesn't support speech input." });
-    const rec = new SR();
+    if (!Ctor) return toast({ title: "Voice not supported", description: "Your browser doesn't support speech input." });
+    const rec = new Ctor();
     rec.lang = lang === "hi" ? "hi-IN" : "en-IN";
-    rec.onresult = (e: SpeechRecognitionEvent) => {
+    rec.onresult = (e) => {
       const t = e.results[0][0].transcript;
       setInput((p) => (p ? p + " " : "") + t);
       taRef.current?.focus();
