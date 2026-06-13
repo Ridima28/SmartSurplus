@@ -232,7 +232,6 @@ export default function AppChat() {
     type SR = { lang: string; start: () => void; onresult: (e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void };
     const w = window as unknown as { webkitSpeechRecognition?: new () => SR; SpeechRecognition?: new () => SR };
     const Ctor = w.webkitSpeechRecognition || w.SpeechRecognition;
-    if (!SR) return toast({ title: "Voice not supported", description: "Your browser doesn't support speech input." });
     if (!Ctor) return toast({ title: "Voice not supported", description: "Your browser doesn't support speech input." });
     const rec = new Ctor();
     rec.lang = lang === "hi" ? "hi-IN" : "en-IN";
