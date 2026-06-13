@@ -1,4 +1,4 @@
-import { Twitter as TwitterIcon, Github as GithubIcon, Linkedin as LinkedinIcon, Mail, Leaf } from "lucide-react";
+import { Send, Globe, Users, Mail, Leaf } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 export default function SiteFooter() {
@@ -17,7 +17,7 @@ export default function SiteFooter() {
               AI-powered crop advisory built for the field supervisors and farmers of Uttarakhand's mountain regions.
             </p>
             <div className="flex gap-2">
-              {[TwitterIcon, LinkedinIcon, GithubIcon, Mail].map((Icon, i) => (
+              {[Send, Users, Globe, Mail].map((Icon, i) => (
                 <a key={i} href="#" className="h-9 w-9 rounded-lg border bg-card flex items-center justify-center hover:bg-accent transition-colors" aria-label="social">
                   <Icon className="h-4 w-4 text-muted-foreground" />
                 </a>
